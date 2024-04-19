@@ -17,11 +17,6 @@ def get_db():
         db.close()
 
 
-@app.get("/")
-def root():
-    return {"message": "Hello my Lord"}
-
-
 @app.get("/authors/", response_model=list[Author])
 def read_authors(
         db: Session = Depends(get_db),
@@ -36,7 +31,7 @@ def read_authors(
 
 
 @app.get(
-    "/authors/{author_id}",
+    "/authors/{author_id}/",
     response_model=Author
 )
 def read_author_detail(
@@ -89,7 +84,7 @@ def read_books(
     )
 
 
-@app.get("/books/{book_id}", response_model=Book)
+@app.get("/books/{book_id}/", response_model=Book)
 def read_book_detail(
         book_id: int,
         db: Session = Depends(get_db)
